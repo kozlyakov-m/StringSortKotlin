@@ -15,7 +15,7 @@ fun main(args:Array<String>){
 
 }
 
-fun getText(args: Array<String>):Array<String>{
+private fun getText(args: Array<String>):Array<String>{
 
     if(args.isEmpty()){
         return readLine()!!.split(" ").toTypedArray()
@@ -42,7 +42,7 @@ fun getText(args: Array<String>):Array<String>{
     }
 }
 
-fun findUnique(text:Array<String>):LinkedHashMap<String, Int>{
+private fun findUnique(text:Array<String>):LinkedHashMap<String, Int>{
     val result:LinkedHashMap<String, Int> = linkedMapOf()
     for(str in text){
 
@@ -57,7 +57,7 @@ fun findUnique(text:Array<String>):LinkedHashMap<String, Int>{
     return result
 }
 
-fun output(result:List<Pair<String, Int>>){
+private fun output(result:List<Pair<String, Int>>){
     for((word, freq) in result){
         println("""$word $freq""")
     }
