@@ -4,7 +4,7 @@ fun main (args:Array<String>){
     for(str in args){
         if(!result.contains(str))
             result.add(str)
-        
+
     }
     result.toMutableList().sort()
 

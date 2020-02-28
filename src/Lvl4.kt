@@ -3,16 +3,11 @@ fun main (args:Array<String>){
     val result:LinkedHashMap<String, Int> = linkedMapOf()
     for(str in args){
 
-        var nothingFound:Boolean = true;
-        for((word, freq) in result) {
-            if (word.equals(str)) {
-                result.put(str, freq+1);
-                nothingFound = false;
-                break;
-            }
-
+        if(result.containsKey(str)){
+            val freq = result[str]
+            result.put(str, freq!!.plus(1) ) // почему-то теперь не дает сделать просто freq+1
         }
-        if(nothingFound){
+        else{
             result.put(str, 1);
         }
     }

@@ -10,25 +10,22 @@ fun main(args:Array<String>){
     else{
         message = args
     }
-    
-    val result: MutableList<MutablePair> = mutableListOf()
+
+    val words:LinkedHashMap<String, Int> = linkedMapOf()
     for(str in message){
 
-        var nothingFound:Boolean = true;
-        for(pair in result) {
-            if (pair.word.equals(str)) {
-                pair.frequency++;
-                nothingFound = false;
-                break;
-            }
-
+        if(words.containsKey(str)){
+            val freq = words[str]
+            words.put(str, freq!!.plus(1) ) // почему-то теперь не дает сделать просто freq+1
         }
-        if(nothingFound){
-            result.add(MutablePair(str,1));
+        else{
+            words.put(str, 1);
         }
     }
 
-    result.sortWith(compareByDescending<MutablePair>{it.frequency}.thenBy {it.word})
+    val comparator = compareByDescending<Pair<String, Int>>{it.second}.thenBy {it.first}
+    val result:List<Pair<String, Int>> = words.toList().sortedWith(comparator)
+
 
     for((word, freq) in result){
         println("""$word $freq""")
