@@ -1,8 +1,6 @@
-
-
-fun main (args:Array<String>){
+fun main(args: Array<String>) {
     args.sort()
-    for(str in args){
+    for (str in args) {
         println(str)
     }
 
