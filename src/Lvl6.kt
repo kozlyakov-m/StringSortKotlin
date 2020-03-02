@@ -14,13 +14,8 @@ fun main(args: Array<String>) {
 
     val words: LinkedHashMap<String, Int> = linkedMapOf()
     for (str in message) {
-
-        if (words.containsKey(str)) {
-            val freq = words[str]
-            words.put(str, freq!!.plus(1)) // почему-то теперь не дает сделать просто freq+1
-        } else {
-            words.put(str, 1);
-        }
+        val freq = words[str] ?: 0
+        words.put(str, freq+1)
     }
 
     val comparator = compareByDescending<Pair<String, Int>> { it.second }.thenBy { it.first }

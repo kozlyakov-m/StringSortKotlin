@@ -47,15 +47,10 @@ private fun checkEmptyLine(input: String?): Array<String> {
 private fun findUnique(text: Array<String>): LinkedHashMap<String, Int> {
     val result: LinkedHashMap<String, Int> = linkedMapOf()
     for (str in text) {
-
-        if (result.containsKey(str)) {
-            val freq = result[str]
-            result.put(str, freq!!.plus(1)) // почему-то теперь не дает сделать просто freq+1
-        } else {
-            result.put(str, 1);
-        }
+        val freq = result[str] ?: 0
+        result.put(str, freq+1)
     }
-    return result
+    return result   
 }
 
 private fun output(result: List<Pair<String, Int>>) {
