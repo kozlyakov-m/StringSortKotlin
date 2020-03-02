@@ -17,24 +17,30 @@ fun main(args: Array<String>) {
 
 private fun getText(args: Array<String>): Array<String> {
 
-    if (args.isEmpty()) {
-        return readLine()!!.split(" ").toTypedArray()
-    } else {
-        if (args[0] == "-f") {
+    return if (args.isNotEmpty()) {
+        if (args[0] != "-f") {
+            args
+        } else {
             try {
                 if (args.size > 1) {
-                    return File(args[1]).readText().split(" ").toTypedArray()
+                    checkEmptyLine(File(args[1]).readText())
                 } else {
-                    println("Не указано имя файла")
                     exitProcess(1)
                 }
             } catch (e: FileNotFoundException) {
-                println(e.message)
                 exitProcess(1)
             }
-        } else {
-            return args
         }
+    } else {
+        checkEmptyLine(readLine()?.trim('"')?.trim())
+    }
+}
+
+private fun checkEmptyLine(input: String?): Array<String> {
+    return if (input?.isEmpty() == true) {
+        emptyArray()
+    } else {
+        input?.split("""[\s\t\n\r]+""".toRegex())?.toTypedArray() ?: emptyArray()
     }
 }
 

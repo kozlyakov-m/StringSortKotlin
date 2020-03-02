@@ -1,10 +1,16 @@
 fun main(args: Array<String>) {
 
     val message: Array<String> =
-        if (args.isEmpty())
-            readLine()!!.split(" ").toTypedArray()
-        else
+        if (args.isNotEmpty()) {
             args
+        } else {
+            val input = readLine()?.trim('"')?.trim()
+            if (input?.isEmpty() == true) {
+                emptyArray()
+            } else {
+                input?.split("""[\s\t\n\r]+""".toRegex())?.toTypedArray() ?: emptyArray()
+            }
+        }
 
     val words: LinkedHashMap<String, Int> = linkedMapOf()
     for (str in message) {
